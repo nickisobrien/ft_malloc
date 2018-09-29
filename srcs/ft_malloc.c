@@ -2,6 +2,7 @@
 
 void free(void *ptr)
 {(void)ptr;
+	munmap(ptr, 5);
 
 }
 
@@ -23,10 +24,10 @@ void *realloc(void *ptr, size_t size)
 int		main(void)
 {
 	char *str = (char *)malloc(sizeof(char) * 5);
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 50; i++)
 	{
 		str[i] = 'a' + i;
 	}
-	str[4] = '\0';
+	str[49] = '\0';
 	printf("Test %s\n", str);
 }
