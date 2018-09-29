@@ -16,4 +16,13 @@
 // 	t_node *node;
 // }				t_lst;
 
+typedef struct {
+	size_t size;
+	char allocated;
+} block_header;
+
+// block overhead
+#define OVERHEAD sizeof(block_header)
+
+
 #endif

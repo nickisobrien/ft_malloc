@@ -18,7 +18,7 @@ void *realloc(void *ptr, size_t size)
 void *malloc(size_t size)
 {
 	void *addr = mmap(0, size,
-		PROT_READ | PROT_WRITE | PROT_EXEC,
+		PROT_READ | PROT_WRITE,
 		MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
 	if (addr == MAP_FAILED)
 		return (NULL);
@@ -36,5 +36,6 @@ int		main(void)
 	}
 	str[4] = '\0';
 	printf("Test %s\n", str);
+	printf("%lu\n", sizeof(block_header));
 	free(str);
 }
