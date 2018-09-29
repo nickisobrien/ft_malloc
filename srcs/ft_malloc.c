@@ -2,7 +2,6 @@
 
 void free(void *addr)
 {(void)addr;
-
 	munmap(addr, 5); // void*, size
 }
 
@@ -38,5 +37,4 @@ int		main(void)
 	str[4] = '\0';
 	printf("Test %s\n", str);
 	free(str);
-	printf("Test %s\n", str);
 }
