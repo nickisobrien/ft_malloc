@@ -5,18 +5,13 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
-// typedef struct	s_node
-// {
-// 	void *mem;
-// 	t_node *next;
-// }				t_node;
-
 typedef struct		s_global
 {
 	void *tiny;
 	void *small;
 	void *large;
 }					t_global;
+t_global global;
 
 typedef struct		s_block_header
 {
@@ -50,6 +45,9 @@ typedef struct		s_node
 #define SMALL 4096
 // large is anything > SMALL
 
-
 #define PAGE_SIZE getpagesize()
+
+void *malloc(size_t size);
+void	*init_memory(size_t size, int type);
+
 #endif
