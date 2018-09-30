@@ -22,7 +22,13 @@ typedef struct		s_block_header
 {
 	size_t size;
 	char allocated;
+	char isEnd;
 }					block_header;
+
+typedef struct		s_node
+{
+	void *next;
+}					t_node;
 
 
 #define CHUNK_SIZE (1 << 14)
@@ -35,6 +41,8 @@ typedef struct		s_block_header
 #define GET_SIZE(p) ((block_header *)(p))->size
 // is allocated?
 #define GET_ALLOC(p) ((block_header *)(p))->allocated
+
+#define IS_END(p) ((block_header *)(p))->isEnd
 // get next block header (bp = block paylaod)
 #define NEXT_BLKP(bp) ((char *)(bp) + GET_SIZE(HDRP(bp)))
 
