@@ -4,7 +4,7 @@ RM = /bin/rm -f
 FLAGS = -Wall -Wextra -Werror
 
 # ft_malloc
-FILES = ft_malloc malloc
+FILES = ft_malloc malloc realloc show_alloc_mem free
 INCLUDE = -I ./includes/
 HEADER = ./includes/ft_malloc.h
 SRC_DIR := ./srcs/

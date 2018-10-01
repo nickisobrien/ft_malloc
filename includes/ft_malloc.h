@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <sys/mman.h>
 #include <unistd.h>
+# include "../libft/includes/libft.h"
 
 typedef struct		s_global
 {
@@ -27,7 +28,6 @@ typedef struct		s_node
 
 
 #define CHUNK_SIZE (1 << 14)
-#define CHUNK_ALIGN(size) (((size)+(CHUNK_SIZE-1)) & ~(CHUNK_SIZE-1))
 // block overhead
 #define OVERHEAD sizeof(block_header)
 // get header from payload pointer (bp = block payload)
@@ -47,7 +47,10 @@ typedef struct		s_node
 
 #define PAGE_SIZE getpagesize()
 
-void *malloc(size_t size);
+void	*malloc(size_t size);
 void	*init_memory(size_t size, int type);
+void	show_alloc_mem();
+void	free(void *addr);
+void 	*realloc(void *ptr, size_t size);
 
 #endif
