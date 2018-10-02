@@ -11,17 +11,18 @@ int		get_type(size_t num)
 
 int		main(void)
 {// check for when realloc is smaller than malloc
-	char *pptr = (char *)malloc(5000);
-	char *pptr2 = (char *)malloc(5500);
-	char *pptr3 = (char *)malloc(6000);
-	// ptr = (char *)realloc((void *)ptr, sizeof(char) * 7000); // this messes printing memory up but 70000 doesn't
-	// for (int i = 5000; i < 7000; i++)
-	// 	ptr[i] = 'b';
-	// this should move to smaller memory
-	// pptr = realloc(pptr,7000);
-	(void)pptr3;
-	(void)pptr;
-	(void)pptr2;
+	// char *pptr = (char *)malloc(5000);
+	// char *pptr2 = (char *)malloc(5500);
+	// char *pptr3 = (char *)malloc(6000);
+	// // ptr = (char *)realloc((void *)ptr, sizeof(char) * 7000); // this messes printing memory up but 70000 doesn't
+	// for (int i = 0; i < 5000; i++)
+		// pptr[i] = 'b';
+	// // this should move to smaller memory
+	// // pptr = realloc(pptr,7000);
+	// (void)pptr3;
+	// (void)pptr;
+	// (void)pptr2;
+	// free(pptr3);
 
 	// printf("%d\n", IS_END(NEXT_BLKP(pptr2)));
 	// free(pptr2);

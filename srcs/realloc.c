@@ -21,9 +21,7 @@ void *realloc(void *ptr, size_t size)
 		void *ptr2 = malloc(size);
 		if (ptr2) // need to do check here to check if ptr is bigger than ptr2
 			ft_memcpy(ptr2, ptr, reallocSize);
-		printf("Freeing...\n");
 		free(ptr);
-		printf("Free'd\n");
 		return (ptr2);
 	}
 	return (NULL);
