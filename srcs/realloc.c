@@ -8,7 +8,7 @@ void *realloc(void *ptr, size_t size)
 	{
 		block_header newHeader;
 		newHeader.isEnd = IS_END(NEXT_BLKP(ptr));
-		newHeader.size = GET_SIZE(HDRP(ptr)) + GET_SIZE(NEXT_BLKP(ptr)) - size - OVERHEAD;
+		newHeader.size = GET_SIZE(HDRP(ptr)) + GET_SIZE(NEXT_BLKP(ptr)) - size;
 		newHeader.allocated = 0;
 		*(block_header*)(ptr + size) = newHeader;
 		GET_SIZE(HDRP(ptr)) = size;

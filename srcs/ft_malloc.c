@@ -10,7 +10,8 @@ int		main(void)
 	for (int i = 5000; i < 7000; i++)
 		ptr[i] = 'b';
 	(void)ptr2;
-	printf("%c %c\n", ptr[3400], ptr[6500]);
+	// printf("%zu %d\n", GET_SIZE(NEXT_BLKP(OVERHEAD+NEXT_BLKP(ptr))), IS_END(NEXT_BLKP(ptr)));
+	// printf("%c %c\n", ptr[3400], ptr[6500]);
 
 	// void *ptr = malloc(sizeof(char) * 3000);
 	// printf("%lu, %d, %c, %lu\n", GET_SIZE(HDRP(ptr)), GET_ALLOC(HDRP(ptr)), ((char*)ptr)[0], GET_SIZE(NEXT_BLKP(ptr)));
