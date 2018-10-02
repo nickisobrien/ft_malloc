@@ -71,20 +71,11 @@ void	*init_memory(size_t size, int type)
 void *malloc(size_t size)
 {
 	void *addr;
-	int type;
-	if (size <= TINY)
-		type = 0;
-	else if (size <= SMALL)
-		type = 1;
-	else
-		type = 2;
+	int type = get_type(size);
 
 	if (!(addr = find_spot(((void**)&global)[type], size, type)))
-	{
 		addr = init_memory(size, type);
-	}
 	if (addr == MAP_FAILED)
 		return (NULL);
-
 	return (addr + OVERHEAD);
 }

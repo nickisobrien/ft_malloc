@@ -52,5 +52,6 @@ void	*init_memory(size_t size, int type);
 void	show_alloc_mem();
 void	free(void *addr);
 void 	*realloc(void *ptr, size_t size);
+int		get_type(size_t num);
 
 #endif

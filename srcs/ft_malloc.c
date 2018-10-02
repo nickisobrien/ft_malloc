@@ -1,18 +1,32 @@
 #include <ft_malloc.h>
 
+int		get_type(size_t num)
+{
+	if (num <= TINY)
+		return (0);
+	if (num <= SMALL)
+		return (1);
+	return (2);
+}
+
 int		main(void)
 {// check for when realloc is smaller than malloc
-	char *ptr = (char *)malloc(sizeof(char) * 5000);
-	for (int i = 0; i < 5000; i++)
-		ptr[i] = 'a';
-	char *ptr2 = (char *)malloc(sizeof(char) * 6000);
-	ptr = (char *)realloc((void *)ptr, sizeof(char) * 7000); // this messes printing memory up but 70000 doesn't
-	for (int i = 5000; i < 7000; i++)
-		ptr[i] = 'b';
+	char *pptr = (char *)malloc(5000);
+	char *pptr2 = (char *)malloc(5500);
+	char *pptr3 = (char *)malloc(6000);
+	// ptr = (char *)realloc((void *)ptr, sizeof(char) * 7000); // this messes printing memory up but 70000 doesn't
+	// for (int i = 5000; i < 7000; i++)
+	// 	ptr[i] = 'b';
 	// this should move to smaller memory
-	ptr2 = (char *)realloc((void*)ptr2, sizeof(char) * 3000);
-	(void)ptr2;
-	ptr = (char *)realloc((void*)ptr, sizeof(char) * 2000);
+	// pptr = realloc(pptr,7000);
+	(void)pptr3;
+	(void)pptr;
+	(void)pptr2;
+
+	// printf("%d\n", IS_END(NEXT_BLKP(pptr2)));
+	// free(pptr2);
+	// pptr2 = (char *)realloc((void*)pptr2, sizeof(char) * 3000);
+	// ptr = (char *)realloc((void*)ptr, sizeof(char) * 2000);
 	// printf("%zu %d\n", GET_SIZE(NEXT_BLKP(OVERHEAD+NEXT_BLKP(ptr))), IS_END(NEXT_BLKP(ptr)));
 	// printf("%c %c\n", ptr[3400], ptr[6500]);
 
@@ -30,6 +44,16 @@ int		main(void)
 	// printf("%lu, %d, %c, %lu, %d\n", GET_SIZE(HDRP(ptr3)), GET_ALLOC(HDRP(ptr3)), ((char*)ptr3)[0], GET_SIZE(NEXT_BLKP(ptr3)), IS_END(NEXT_BLKP(ptr3)));
 	// void *ptr5 = malloc(sizeof(char) * 1000); // need to figure out how to ensure that this next_blkp isn't end because it's getting slipped into front of 2nd alloc
 	// printf("%lu, %d, %c, %lu, %d\n", GET_SIZE(HDRP(ptr5)), GET_ALLOC(HDRP(ptr5)), ((char*)ptr5)[0], GET_SIZE(NEXT_BLKP(ptr5)), IS_END(NEXT_BLKP(ptr5)));
+
+	// void *ptr = malloc(400);
+	// void *ptr4 = malloc(3000);
+	// void *ptr2 = malloc(550);
+	// void *ptr3 = malloc(3000);
+	// void *ptr5 = malloc(110);
+	// free(ptr);
+	// free(ptr3);
+	// // free(ptr5);
+	// (void)ptr;(void)ptr2;(void)ptr3; (void)ptr4; (void)ptr5;
 
 	// void *ptr = malloc(40000);
 	// void *ptr2 = malloc(25000);

@@ -1,24 +1,26 @@
 #include <ft_malloc.h>
 
+// |16 200 16 30 16 12 void*
+
 void sweep(void *ptr)
 {
 	while (ptr)
 	{
 		while (!IS_END(ptr))
 			ptr += OVERHEAD + GET_SIZE(ptr);
-		t_node *nextptr = (t_node*)(ptr + OVERHEAD + GET_SIZE(ptr));
-		if (!nextptr->next)
+		t_node *node = (t_node*)(ptr + OVERHEAD + GET_SIZE(ptr));
+		if (!node->next)
 			break;
-		if (GET_ALLOC(nextptr->next) == 0 && IS_END(nextptr->next))
+		if (GET_ALLOC(node->next) == 0 && IS_END(node->next) == 1)
 		{
-			void *save = nextptr->next;
-			nextptr = (t_node*)(ptr + OVERHEAD + GET_SIZE(ptr)); // assign currents nextptr to next's nextptr
-			ptr = nextptr->next;
-			if (!munmap(save, OVERHEAD + GET_SIZE(ptr)))
+			void *save = node->next;
+			void *next = ((t_node*)(save + GET_SIZE(save) + OVERHEAD))->next;
+			((t_node*)(ptr + OVERHEAD + GET_SIZE(ptr)))->next = next;
+			if (munmap(save, OVERHEAD + GET_SIZE(save) + sizeof(t_node)) == -1)
 				printf("ERROR\n");
 		}
 		else
-			ptr = nextptr->next;
+			ptr = node->next;
 	}
 	
 }
@@ -37,8 +39,8 @@ void free(void *addr)
 	}
 	if (IS_END(HDRP(addr)))
 	{
-		sweep(global.small);
-		sweep(global.tiny);
+		// sweep(global.small);
+		// sweep(global.tiny);
 		sweep(global.large);
 	}
 }
