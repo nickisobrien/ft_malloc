@@ -9,7 +9,10 @@ int		main(void)
 	ptr = (char *)realloc((void *)ptr, sizeof(char) * 7000); // this messes printing memory up but 70000 doesn't
 	for (int i = 5000; i < 7000; i++)
 		ptr[i] = 'b';
+	// this should move to smaller memory
+	ptr2 = (char *)realloc((void*)ptr2, sizeof(char) * 3000);
 	(void)ptr2;
+	ptr = (char *)realloc((void*)ptr, sizeof(char) * 2000);
 	// printf("%zu %d\n", GET_SIZE(NEXT_BLKP(OVERHEAD+NEXT_BLKP(ptr))), IS_END(NEXT_BLKP(ptr)));
 	// printf("%c %c\n", ptr[3400], ptr[6500]);
 
