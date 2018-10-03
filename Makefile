@@ -15,7 +15,7 @@ SRC_DIR := ./srcs/
 OBJ_DIR := ./objs/
 CFILES = $(patsubst %, $(SRC_DIR)%.c, $(FILES))
 OFILES = $(patsubst %, $(OBJ_DIR)%.o, $(FILES))
-SYM_LINK = libft_malloc_$HOSTTYPE.so
+SYM_LINK = libft_malloc_$(HOSTTYPE).so
 SYM_FILE = libft_malloc.so
 
 # libft lib
