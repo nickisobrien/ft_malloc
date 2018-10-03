@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 20:43:11 by nobrien           #+#    #+#             */
-/*   Updated: 2018/10/03 13:00:25 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/10/03 13:28:28 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static size_t	show_alloc_mem_helper(void *ptr, char *str)
 
 void			show_alloc_mem(void)
 {
-	unsigned int bytes;
+	unsigned int	bytes;
 
 	bytes = 0;
 	bytes += show_alloc_mem_helper(g_global.tiny, "TINY:");
