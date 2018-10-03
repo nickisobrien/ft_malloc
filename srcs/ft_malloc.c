@@ -9,8 +9,19 @@ int		get_type(size_t num)
 	return (2);
 }
 
+// might be error memory is being left unremoved because realloc can't
+// free what was pointed to before if it's passing something else with realloc
+// and if im reallocating from something else, should i free that ?
 int		main(void)
-{// check for when realloc is smaller than malloc
+{
+	// void *ptr = malloc(0);
+	// void *ptr = NULL;
+	// ptr = realloc(ptr, 100);
+	// ptr = realloc(ptr, 0);
+	// free(ptr);
+	// (void)ptr;
+
+// check for when realloc is smaller than malloc
 	// char *pptr = (char *)malloc(5000);
 	// char *pptr2 = (char *)malloc(5500);
 	// char *pptr3 = (char *)malloc(6000);
@@ -55,6 +66,30 @@ int		main(void)
 	// free(ptr3);
 	// // free(ptr5);
 	// (void)ptr;(void)ptr2;(void)ptr3; (void)ptr4; (void)ptr5;
+
+	void *r = malloc(4000);
+	void *tr = malloc(5000);
+	((char*)((char*)tr))[1] = 'a';
+	void *ptr = malloc(20);
+	void *ptr2 = realloc(tr, 100);
+	// printf("%c\n", ((char*)ptr2)[1]);
+	void *ptr3 = malloc(2000);
+	void *ptr4 = malloc(2500);
+	// printf("%c\n", ((char*)tr)[1]);
+	ptr = realloc(ptr, 4000);
+	((char*)tr)[1] = 'b';
+	// printf("%c\n", ((char*)tr)[1]);
+	free(r);
+	free(tr);
+	free(ptr2);
+	free(ptr4);
+	free(ptr3);
+	free(ptr);
+
+
+	// void *ptr = NULL;
+	// ptr = realloc(ptr, 100);
+	// free(ptr);
 
 	// void *ptr = malloc(40000);
 	// void *ptr2 = malloc(25000);

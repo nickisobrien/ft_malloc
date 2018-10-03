@@ -53,5 +53,6 @@ void	show_alloc_mem();
 void	free(void *addr);
 void 	*realloc(void *ptr, size_t size);
 int		get_type(size_t num);
+void	*find_spot(void *ptr, size_t size, int type);
 
 #endif
