@@ -12,15 +12,6 @@
 
 #include <ft_malloc.h>
 
-int		get_type(size_t num)
-{
-	if (num <= TINY)
-		return (0);
-	if (num <= SMALL)
-		return (1);
-	return (2);
-}
-
 // might be error memory is being left unremoved because realloc can't
 // free what was pointed to before if it's passing something else with realloc
 // and if im reallocating from something else, should i free that ?

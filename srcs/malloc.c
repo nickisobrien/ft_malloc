@@ -12,6 +12,15 @@
 
 #include <ft_malloc.h>
 
+int		get_type(size_t num)
+{
+	if (num <= TINY)
+		return (0);
+	if (num <= SMALL)
+		return (1);
+	return (2);
+}
+
 void	*helper(void *ptr, size_t size, int type)
 {
 	void	*new_memory;
