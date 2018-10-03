@@ -14,12 +14,12 @@ typedef struct		s_global
 }					t_global;
 t_global global;
 
-typedef struct		s_block_header
+typedef struct		s_block
 {
 	size_t size;
 	char allocated;
 	char isEnd;
-}					block_header;
+}					block;
 
 typedef struct		s_node
 {
@@ -29,15 +29,15 @@ typedef struct		s_node
 
 #define CHUNK_SIZE (1 << 14)
 // block overhead
-#define OVERHEAD sizeof(block_header)
+#define OVERHEAD sizeof(block)
 // get header from payload pointer (bp = block payload)
-#define HDRP(bp) ((char *)(bp) - sizeof(block_header))
+#define HDRP(bp) ((char *)(bp) - sizeof(block))
 // p = block header
-#define GET_SIZE(p) ((block_header *)(p))->size
+#define GET_SIZE(p) ((block *)(p))->size
 // is allocated?
-#define GET_ALLOC(p) ((block_header *)(p))->allocated
+#define GET_ALLOC(p) ((block *)(p))->allocated
 
-#define IS_END(p) ((block_header *)(p))->isEnd
+#define IS_END(p) ((block *)(p))->isEnd
 // get next block header (bp = block paylaod)
 #define NEXT_BLKP(bp) ((char *)(bp) + GET_SIZE(HDRP(bp)))
 
@@ -48,11 +48,11 @@ typedef struct		s_node
 #define PAGE_SIZE getpagesize()
 
 void	*malloc(size_t size);
-void	*init_memory(size_t size, int type);
 void	show_alloc_mem();
 void	free(void *addr);
 void 	*realloc(void *ptr, size_t size);
 int		get_type(size_t num);
 void	*find_spot(void *ptr, size_t size, int type);
+void	*init_memory(size_t size, int type);
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_malloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/02 20:18:16 by nobrien           #+#    #+#             */
+/*   Updated: 2018/10/02 21:12:19 by nobrien          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <ft_malloc.h>
 
 int		get_type(size_t num)
@@ -71,7 +83,7 @@ int		main(void)
 	void *tr = malloc(5000);
 	((char*)((char*)tr))[1] = 'a';
 	void *ptr = malloc(20);
-	void *ptr2 = realloc(tr, 100);
+	void *ptr2 = realloc(NULL, 0);
 	// printf("%c\n", ((char*)ptr2)[1]);
 	void *ptr3 = malloc(2000);
 	void *ptr4 = malloc(2500);
@@ -79,6 +91,8 @@ int		main(void)
 	ptr = realloc(ptr, 4000);
 	((char*)tr)[1] = 'b';
 	// printf("%c\n", ((char*)tr)[1]);
+	show_alloc_mem();
+	printf("\n");
 	free(r);
 	free(tr);
 	free(ptr2);
@@ -116,5 +130,6 @@ int		main(void)
 	// 	// printf("%zu %d\mn", GET_SIZE(NEXT_BLKP(ptr)), IS_END(NEXT_BLKP(ptr)));
 	// 	(void)ptr;
 	// }
+	sleep(10);
 	show_alloc_mem();
 }
