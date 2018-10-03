@@ -6,13 +6,15 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 20:18:16 by nobrien           #+#    #+#             */
-/*   Updated: 2018/10/02 21:10:51 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/10/03 13:00:35 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_malloc.h>
 
-int		get_type(size_t num)
+t_global		g_global;
+
+int				get_type(size_t num)
 {
 	if (num <= TINY)
 		return (0);
@@ -21,7 +23,7 @@ int		get_type(size_t num)
 	return (2);
 }
 
-void	*helper(void *ptr, size_t size, int type)
+void			*helper(void *ptr, size_t size, int type)
 {
 	void	*new_memory;
 
@@ -39,18 +41,18 @@ void	*helper(void *ptr, size_t size, int type)
 	else
 	{
 		new_memory = ptr;
-		(*(block*)ptr).size = size;
-		(*(block*)ptr).allocated = 1;
-		(*(block*)ptr).isEnd = 0;
-		(*(block*)(ptr + OVERHEAD +
+		(*(t_block*)ptr).size = size;
+		(*(t_block*)ptr).allocated = 1;
+		(*(t_block*)ptr).is_end = 0;
+		(*(t_block*)(ptr + OVERHEAD +
 			size)).size = GET_SIZE(new_memory) - OVERHEAD - size;
-		(*(block*)(ptr + OVERHEAD + size)).allocated = 0;
-		(*(block*)(ptr + OVERHEAD + size)).isEnd = IS_END(new_memory);
+		(*(t_block*)(ptr + OVERHEAD + size)).allocated = 0;
+		(*(t_block*)(ptr + OVERHEAD + size)).is_end = IS_END(new_memory);
 	}
 	return (ptr);
 }
 
-void	*find_spot(void *ptr, size_t size, int type)
+void			*find_spot(void *ptr, size_t size, int type)
 {
 	if (!ptr)
 		return (NULL);
@@ -69,7 +71,7 @@ void	*find_spot(void *ptr, size_t size, int type)
 	return (helper(ptr, size, type));
 }
 
-void	*init_memory(size_t size, int type)
+void			*init_memory(size_t size, int type)
 {
 	void	*addr;
 	int		page_total;
@@ -82,20 +84,20 @@ void	*init_memory(size_t size, int type)
 		perror("Error");
 		exit(-1);
 	}
-	if (!((void**)&global)[type])
-		((void**)&global)[type] = addr;
+	if (!((void**)&g_global)[type])
+		((void**)&g_global)[type] = addr;
 	(*(t_node*)(addr + page_total - sizeof(t_node))).next = NULL;
-	(*(block*)addr).size = size;
-	(*(block*)addr).allocated = 1;
-	(*(block*)addr).isEnd = 0;
-	(*(block*)(addr + OVERHEAD +
+	(*(t_block*)addr).size = size;
+	(*(t_block*)addr).allocated = 1;
+	(*(t_block*)addr).is_end = 0;
+	(*(t_block*)(addr + OVERHEAD +
 		size)).size = page_total - OVERHEAD * 2 - size - sizeof(t_node);
-	(*(block*)(addr + OVERHEAD + size)).allocated = 0;
-	(*(block*)(addr + OVERHEAD + size)).isEnd = 1;
+	(*(t_block*)(addr + OVERHEAD + size)).allocated = 0;
+	(*(t_block*)(addr + OVERHEAD + size)).is_end = 1;
 	return (addr);
 }
 
-void	*malloc(size_t size)
+void			*malloc(size_t size)
 {
 	void	*addr;
 	int		type;
@@ -103,7 +105,7 @@ void	*malloc(size_t size)
 	if (!size)
 		return (NULL);
 	type = get_type(size);
-	if (!(addr = find_spot(((void**)&global)[type], size, type)))
+	if (!(addr = find_spot(((void**)&g_global)[type], size, type)))
 		addr = init_memory(size, type);
 	if (addr == MAP_FAILED)
 		return (NULL);

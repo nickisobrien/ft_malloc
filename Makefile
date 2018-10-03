@@ -8,7 +8,7 @@ OBJ_DIR = ./objs/
 OBJFLAGS = -g -Wall -Werror -Wextra -c -fPIC
 LIBFLAGS = -g -shared -ldl
 SOURCE_DIR = srcs
-MALLOC_SRC = free ft_malloc malloc realloc show_alloc_mem
+MALLOC_SRC = free malloc realloc show_alloc_mem
 
 MALLOC_OBJ = $(patsubst %, $(OBJ_DIR)/%.o, $(MALLOC_SRC))
 MALLOC_INC = -I includes
