@@ -130,6 +130,6 @@ int		main(void)
 	// 	// printf("%zu %d\mn", GET_SIZE(NEXT_BLKP(ptr)), IS_END(NEXT_BLKP(ptr)));
 	// 	(void)ptr;
 	// }
-	sleep(10);
+	// sleep(10);
 	show_alloc_mem();
 }

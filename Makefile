@@ -4,7 +4,7 @@ RM = /bin/rm -f
 FLAGS = -Wall -Wextra -Werror
 
 ifeq ($(HOSTTYPE),)
-	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
+HOSTTYPE := $(shell uname -m)_$(shell uname -s)
 endif
 
 # ft_malloc
@@ -15,7 +15,8 @@ SRC_DIR := ./srcs/
 OBJ_DIR := ./objs/
 CFILES = $(patsubst %, $(SRC_DIR)%.c, $(FILES))
 OFILES = $(patsubst %, $(OBJ_DIR)%.o, $(FILES))
-SYM_FILE = libft_malloc_$HOSTTYPE.so
+SYM_LINK = libft_malloc_$HOSTTYPE.so
+SYM_FILE = libft_malloc.so
 
 # libft lib
 LFT_DIR = ./libft/
@@ -26,7 +27,7 @@ LFT_LINK = -L $(LFT_DIR) -l ft
 .PHONY: all clean fclean re
 
 all: rmsymlink $(LFT_LIB) $(NAME)
-	@ln -s libft_malloc.so $(SYM_FILE)~
+	@ln -s $(SYM_LINK) $(SYM_FILE)
 	@echo $(SYM_FILE) created
 
 $(LFT_LIB):
@@ -44,13 +45,13 @@ $(NAME): $(OBJ_DIR) $(OFILES)
 	@echo [INFO] ft_malloc Binary Created
 
 rmsymlink:
-	rm -f $(SYM_FILE)~	
+	rm -f $(SYM_FILE)
 
 clean:
 	@rm -rf $(OBJ_DIR)
 	@echo [INFO] ft_malloc Object Files Directory Destroyed
 	@make -C $(LFT_DIR) clean
-	@rm -f $(SYM_FILE)~
+	@rm -f $(SYM_FILE)
 	@echo $(SYM_FILE) removed
 
 fclean: clean
