@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 20:18:16 by nobrien           #+#    #+#             */
-/*   Updated: 2018/10/03 13:11:52 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/10/03 20:00:08 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int				get_type(size_t num)
 void			*helper(void *ptr, size_t size, int type)
 {
 	void	*new_memory;
+	size_t	save;
+	int		end;
 
 	if (GET_ALLOC(ptr) || GET_SIZE(ptr) < size + OVERHEAD * 2)
 	{
@@ -40,14 +42,14 @@ void			*helper(void *ptr, size_t size, int type)
 	}
 	else
 	{
-		new_memory = ptr;
-		(*(t_block*)ptr).size = size;
-		(*(t_block*)ptr).allocated = 1;
-		(*(t_block*)ptr).is_end = 0;
-		(*(t_block*)(ptr + OVERHEAD +
-			size)).size = GET_SIZE(new_memory) - OVERHEAD - size;
-		(*(t_block*)(ptr + OVERHEAD + size)).allocated = 0;
-		(*(t_block*)(ptr + OVERHEAD + size)).is_end = IS_END(new_memory);
+		save = GET_SIZE(ptr);
+		end = IS_END(ptr);
+		GET_SIZE(ptr) = size;
+		GET_ALLOC(ptr) = 1;
+		IS_END(ptr) = 0;
+		GET_ALLOC(NEXT_BLKP(ptr + OVERHEAD)) = 0;
+		GET_SIZE(NEXT_BLKP(ptr + OVERHEAD)) = save - OVERHEAD - size;
+		IS_END(NEXT_BLKP(ptr + OVERHEAD)) = end;
 	}
 	return (ptr);
 }
@@ -66,7 +68,7 @@ void			*find_spot(void *ptr, size_t size, int type)
 				break ;
 		}
 		else
-			ptr += OVERHEAD + GET_SIZE(ptr);
+			ptr = NEXT_BLKP(OVERHEAD + ptr);
 	}
 	return (helper(ptr, size, type));
 }
@@ -74,7 +76,7 @@ void			*find_spot(void *ptr, size_t size, int type)
 void			*init_memory(size_t size, int type)
 {
 	void	*addr;
-	int		page_total;
+	size_t	page_total;
 
 	page_total = PAGE_SIZE * (size / PAGE_SIZE + 1);
 	addr = mmap(NULL, page_total, PROT_READ |
@@ -84,13 +86,12 @@ void			*init_memory(size_t size, int type)
 	if (!((void**)&g_global)[type])
 		((void**)&g_global)[type] = addr;
 	(*(t_node*)(addr + page_total - sizeof(t_node))).next = NULL;
-	(*(t_block*)addr).size = size;
-	(*(t_block*)addr).allocated = 1;
-	(*(t_block*)addr).is_end = 0;
-	(*(t_block*)(addr + OVERHEAD +
-		size)).size = page_total - OVERHEAD * 2 - size - sizeof(t_node);
-	(*(t_block*)(addr + OVERHEAD + size)).allocated = 0;
-	(*(t_block*)(addr + OVERHEAD + size)).is_end = 1;
+	GET_SIZE(addr) = size;
+	GET_ALLOC(addr) = 1;
+	IS_END(addr) = 0;
+	GET_SIZE(NEXT_BLKP(addr + OVERHEAD)) = page_total - OVERHEAD * 2 - size - sizeof(t_node);
+	GET_ALLOC(NEXT_BLKP(addr + OVERHEAD)) = 0;
+	IS_END(NEXT_BLKP(addr + OVERHEAD)) = 1;
 	return (addr);
 }
 

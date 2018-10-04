@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 20:18:16 by nobrien           #+#    #+#             */
-/*   Updated: 2018/10/03 13:29:12 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/10/03 20:13:00 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		main(void)
 	// void *ptr5 = malloc(sizeof(char) * 1000); // need to figure out how to ensure that this next_blkp isn't end because it's getting slipped into front of 2nd alloc
 	// printf("%lu, %d, %c, %lu, %d\n", GET_SIZE(HDRP(ptr5)), GET_ALLOC(HDRP(ptr5)), ((char*)ptr5)[0], GET_SIZE(NEXT_BLKP(ptr5)), IS_END(NEXT_BLKP(ptr5)));
 
-	// void *ptr = malloc(400);
+	// void *ptr = malloc(40);
 	// void *ptr4 = malloc(3000);
 	// void *ptr2 = malloc(550);
 	// void *ptr3 = malloc(3000);
@@ -70,26 +70,155 @@ int		main(void)
 	// // free(ptr5);
 	// (void)ptr;(void)ptr2;(void)ptr3; (void)ptr4; (void)ptr5;
 
-	void *r = malloc(4000);
-	void *tr = malloc(5000);
-	((char*)((char*)tr))[1] = 'a';
-	void *ptr = malloc(20);
-	void *ptr2 = realloc(NULL, 0);
-	// printf("%c\n", ((char*)ptr2)[1]);
-	void *ptr3 = malloc(2000);
-	void *ptr4 = malloc(2500);
+	// void *r = malloc(500);
+	// void *ptr3 = malloc(2100);
+	// void *ptr4 = malloc(2500);
+
+
+	// ptr = realloc(ptr, 4000);
+	// printf("TEST\n");
+	// printf("TEST\n");
 	// printf("%c\n", ((char*)tr)[1]);
-	ptr = realloc(ptr, 4000);
-	((char*)tr)[1] = 'b';
-	// printf("%c\n", ((char*)tr)[1]);
-	show_alloc_mem();
-	printf("\n");
-	free(r);
-	free(tr);
-	free(ptr2);
-	free(ptr4);
-	free(ptr3);
-	free(ptr);
+	// show_alloc_mem();
+	// printf("\n");
+	// free(r);
+	// free(tr);
+	// free(ptr2);
+	// free(ptr4);
+	// free(ptr3);
+	// free(ptr);
+	// free(ptr5);
+
+	// void *ptr1 = malloc(10000);
+	// void *apr1 = malloc(10);
+	// void *apt1 = malloc(444);
+	// void *atr1 = malloc(1000);
+	// void *aar1 = malloc(100000);
+	// void *aat1 = malloc(555);
+	// void *ptr2 = malloc(10000);
+	// void *apr2 = malloc(10);
+	// void *apt2 = malloc(444);
+	// void *atr2 = malloc(1000);
+	// void *aar2 = malloc(100000);
+	// void *aat2 = malloc(555);
+	// void *ptr3 = malloc(10000);
+	// void *apr3 = malloc(10);
+	// void *apt3 = malloc(444);
+	// void *atr3 = malloc(1000);
+	// void *aar3 = malloc(100000);
+	// void *aat3 = malloc(555);
+	// void *ptr4 = malloc(10000);
+	// void *apr4 = malloc(10);
+	// void *apt4 = malloc(444);
+	// void *atr4 = malloc(1000);
+	// void *aar4 = malloc(100000);
+	// void *aat4 = malloc(555);
+	// void *ptr5 = malloc(10000);
+	// void *apr5 = malloc(10);
+	// void *apt5 = malloc(444);
+	// void *atr5 = malloc(1000);
+	// void *aar5 = malloc(100000);
+	// void *aat5 = malloc(555);
+	// void *ptr6 = malloc(10000);
+	// void *apr6 = malloc(10);
+	// void *apt6 = malloc(444);
+	// void *atr6 = malloc(1000);
+	// void *aar6 = malloc(100000);
+	// void *aat6 = malloc(555);
+	// void *ptr7 = malloc(10000);
+	// void *apr7 = malloc(10);
+	// void *apt7 = malloc(444);
+	// void *atr7 = malloc(1000);
+	// void *aar7 = malloc(100000);
+	// void *aat7 = malloc(555);
+	// show_alloc_mem();
+	// free(ptr1);
+	// free(apr1);
+	// free(apt1);
+	// free(atr1);
+	// free(aar1);
+	// free(aat1);
+	// free(ptr2);
+	// free(apr2);
+	// free(apt2);
+	// free(atr2);
+	// free(aat2);
+	// free(aar2);
+	// free(ptr3);
+	// free(apr3);
+	// free(apt3);
+	// free(atr3);
+	// free(aar3);
+	// free(aat3);
+	// free(ptr4);
+	// free(apr4);
+	// free(apt4);
+	// free(atr4);
+	// free(aar4);
+	// free(aat4);
+	// free(ptr5);
+	// free(apr5);
+	// free(apt5);
+	// free(atr5);
+	// free(aar5);
+	// free(aat5);
+	// free(ptr6);
+	// free(apr6);
+	// free(apt6);
+	// free(atr6);
+	// free(aat6);
+	// free(aar6);
+	// free(ptr7);
+	// free(apr7);
+	// free(apt7);
+	// free(atr7);
+	// free(aar7);
+	// free(aat7);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	// void *ptr = NULL;
@@ -108,18 +237,21 @@ int		main(void)
 	// 	ptr = malloc(sizeof(char) * 20);
 	// 	// printf("%zu %d\mn", GET_SIZE(NEXT_BLKP(ptr)), IS_END(NEXT_BLKP(ptr)));
 	// 	(void)ptr;
+	// 	free(ptr);
 	// }
 	// for (int i = 0; i < 4; i++)
 	// {
 	// 	ptr = malloc(sizeof(char) * 200);
 	// 	// printf("%zu %d\mn", GET_SIZE(NEXT_BLKP(ptr)), IS_END(NEXT_BLKP(ptr)));
 	// 	(void)ptr;
+	// 	free(ptr);
 	// }
 	// for (int i = 0; i < 2; i++)
 	// {
 	// 	ptr = malloc(sizeof(char) * 8000);
 	// 	// printf("%zu %d\mn", GET_SIZE(NEXT_BLKP(ptr)), IS_END(NEXT_BLKP(ptr)));
 	// 	(void)ptr;
+	// 	free(ptr);
 	// }
 	// sleep(10);
 	show_alloc_mem();
