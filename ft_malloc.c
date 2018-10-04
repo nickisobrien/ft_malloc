@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 20:18:16 by nobrien           #+#    #+#             */
-/*   Updated: 2018/10/03 20:25:58 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/10/03 21:12:20 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,14 @@ int		main(void)
 	// free(ptr);
 	// free(ptr5);
 
+	void *ptr = malloc(100000000);
 
-	// printf("Pre memory\n");
-	// show_alloc_mem();
-	// printf("\n");
+	printf("Pre memory\n");
+	show_alloc_mem();
+	printf("\n");
+
+	free(ptr);
+
 	// void *ptr1 = malloc(10000);
 	// ptr1 = realloc(ptr1,10000);
 	// void *apr1 = malloc(00010);

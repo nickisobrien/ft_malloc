@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 20:43:11 by nobrien           #+#    #+#             */
-/*   Updated: 2018/10/03 19:55:17 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/10/03 21:08:28 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static size_t	show_alloc_mem_helper(void *ptr, char *str)
 
 void			show_alloc_mem(void)
 {
-	unsigned int	bytes;
+	size_t	bytes;
 
 	bytes = 0;
 	if (g_global.tiny)
@@ -50,5 +50,5 @@ void			show_alloc_mem(void)
 		bytes += show_alloc_mem_helper(g_global.small, "SMALL:");
 	if (g_global.large)
 		bytes += show_alloc_mem_helper(g_global.large, "LARGE:");
-	printf("Total : %u bytes\n", bytes);
+	printf("Total : %zu bytes\n", bytes);
 }

@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 12:18:38 by nobrien           #+#    #+#             */
-/*   Updated: 2018/10/03 16:31:29 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/10/03 20:50:24 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct		s_node
 {
 	void *next;
 }					t_node;
+
 
 # define OVERHEAD sizeof(t_block)
 # define HDRP(bp) ((char *)(bp) - sizeof(t_block))

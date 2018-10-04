@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 20:18:16 by nobrien           #+#    #+#             */
-/*   Updated: 2018/10/03 20:16:57 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/10/03 21:05:40 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void			*malloc(size_t size)
 	void	*addr;
 	int		type;
 
-	if (!size)
+	if (!size || size >= 140737488355327)
 		return (NULL);
 	type = get_type(size);
 	if (!(addr = find_spot(((void**)&g_global)[type], size, type)))
