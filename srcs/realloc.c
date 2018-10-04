@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 20:18:16 by nobrien           #+#    #+#             */
-/*   Updated: 2018/10/03 20:01:15 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/10/03 20:14:15 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void		*realloc(void *ptr, size_t size)
 	{
 		ptr2 = malloc(size);
 		if (ptr && ptr2)
-			ft_memcpy(ptr2, ptr,  GET_SIZE(HDRP(ptr)));
+			ft_memcpy(ptr2, ptr, GET_SIZE(HDRP(ptr)));
 		free(ptr);
 		return (ptr2);
 	}

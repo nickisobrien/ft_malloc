@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 20:18:16 by nobrien           #+#    #+#             */
-/*   Updated: 2018/10/03 20:00:08 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/10/03 20:16:57 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void			*helper(void *ptr, size_t size, int type)
 	int		end;
 
 	if (GET_ALLOC(ptr) || GET_SIZE(ptr) < size + OVERHEAD * 2)
-	{
 		if ((*(t_node*)(ptr + GET_SIZE(ptr))).next)
 			find_spot((*(t_node*)(ptr + GET_SIZE(ptr))).next, size, type);
 		else
@@ -39,7 +38,6 @@ void			*helper(void *ptr, size_t size, int type)
 			(*(t_node*)(ptr + OVERHEAD + GET_SIZE(ptr))).next = new_memory;
 			return (new_memory);
 		}
-	}
 	else
 	{
 		save = GET_SIZE(ptr);
@@ -89,7 +87,8 @@ void			*init_memory(size_t size, int type)
 	GET_SIZE(addr) = size;
 	GET_ALLOC(addr) = 1;
 	IS_END(addr) = 0;
-	GET_SIZE(NEXT_BLKP(addr + OVERHEAD)) = page_total - OVERHEAD * 2 - size - sizeof(t_node);
+	GET_SIZE(NEXT_BLKP(addr + OVERHEAD)) = page_total -
+	OVERHEAD * 2 - size - sizeof(t_node);
 	GET_ALLOC(NEXT_BLKP(addr + OVERHEAD)) = 0;
 	IS_END(NEXT_BLKP(addr + OVERHEAD)) = 1;
 	return (addr);
