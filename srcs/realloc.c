@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 20:18:16 by nobrien           #+#    #+#             */
-/*   Updated: 2018/10/03 20:14:15 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/10/04 14:08:50 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,26 @@
 void		*realloc(void *ptr, size_t size)
 {
 	void	*ptr2;
+	size_t	smaller;
 
 	if (ptr && get_type(size) == get_type(GET_SIZE(HDRP(ptr))) &&
 		GET_ALLOC(NEXT_BLKP(ptr)) == 0 && GET_SIZE(HDRP(ptr)) +
 		GET_SIZE(NEXT_BLKP(ptr)) > size + OVERHEAD)
 	{
-		(*(t_block*)(ptr + size)).is_end = IS_END(NEXT_BLKP(ptr));
-		(*(t_block*)(ptr + size)).size = GET_SIZE(
-			HDRP(ptr)) + GET_SIZE(NEXT_BLKP(ptr)) - size;
-		(*(t_block*)(ptr + size)).allocated = 0;
+		IS_END(ptr + size) = IS_END(NEXT_BLKP(ptr));
+		GET_SIZE(ptr + size) = GET_SIZE(HDRP(ptr)) +
+		GET_SIZE(NEXT_BLKP(ptr)) - size;
+		GET_ALLOC(ptr + size) = 0;
 		GET_SIZE(HDRP(ptr)) = size;
 		return (ptr);
 	}
 	else
 	{
+		if (ptr)
+			smaller = size < GET_SIZE(HDRP(ptr)) ? size : GET_SIZE(HDRP(ptr));
 		ptr2 = malloc(size);
 		if (ptr && ptr2)
-			ft_memcpy(ptr2, ptr, GET_SIZE(HDRP(ptr)));
+			ft_memcpy(ptr2, ptr, smaller);
 		free(ptr);
 		return (ptr2);
 	}
