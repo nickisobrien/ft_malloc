@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 20:18:16 by nobrien           #+#    #+#             */
-/*   Updated: 2018/10/03 21:28:53 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/10/04 13:50:09 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void			*init_memory(size_t size, int type)
 	void	*addr;
 	size_t	page_total;
 
-	page_total = PAGE_SIZE * (size / PAGE_SIZE + 1); // need to fix this calculation
+	page_total = PAGE_SIZE * ((size + OVERHEAD +
+		sizeof(t_node)) / PAGE_SIZE + 1);
 	addr = mmap(NULL, page_total, PROT_READ |
 		PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
 	if (addr == MAP_FAILED)
@@ -99,7 +100,7 @@ void			*malloc(size_t size)
 	void	*addr;
 	int		type;
 
-	if (!size || size >= 100000000)
+	if (!size)
 		return (NULL);
 	type = get_type(size);
 	if (!(addr = find_spot(((void**)&g_global)[type], size, type)))
