@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 20:18:16 by nobrien           #+#    #+#             */
-/*   Updated: 2018/10/03 21:15:27 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/10/03 21:27:33 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void			*init_memory(size_t size, int type)
 	page_total = PAGE_SIZE * (size / PAGE_SIZE + 1);
 	addr = mmap(NULL, page_total, PROT_READ |
 		PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
-	if ((int)addr == -1)
+	if (addr == MAP_FAILED)
 		return (NULL);
 	if (!((void**)&g_global)[type])
 		((void**)&g_global)[type] = addr;
