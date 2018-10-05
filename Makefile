@@ -31,7 +31,7 @@ $(MALLOC): $(LFT_LIB) $(MALLOC_OBJ)
 $(LFT_LIB):
 	@printf "%-50s" "Building $@... "
 	make -C $(LFT_DIR)
-	@echo "DONE"
+	@echo "Libft compiled"
 
 $(OBJ_DIR)%.o: $(SOURCE_DIR)/%.c
 	@mkdir -p $(dir $@)
