@@ -6,13 +6,15 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 20:18:16 by nobrien           #+#    #+#             */
-/*   Updated: 2018/10/02 20:28:20 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/10/03 21:06:13 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_malloc.h>
 
-void	sweep(void *ptr)
+t_global	g_global;
+
+void		sweep(void *ptr)
 {
 	t_node	*node;
 	void	*save;
@@ -41,7 +43,7 @@ void	sweep(void *ptr)
 	}
 }
 
-void	free(void *addr)
+void		free(void *addr)
 {
 	if (!addr)
 		return ;
@@ -53,8 +55,8 @@ void	free(void *addr)
 	}
 	if (IS_END(HDRP(addr)))
 	{
-		sweep(global.tiny);
-		sweep(global.small);
-		sweep(global.large);
+		sweep(g_global.tiny);
+		sweep(g_global.small);
+		sweep(g_global.large);
 	}
 }

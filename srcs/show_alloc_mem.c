@@ -6,38 +6,49 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 20:43:11 by nobrien           #+#    #+#             */
-/*   Updated: 2018/10/02 20:40:07 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/10/03 21:08:28 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_malloc.h>
 
-static void	show_alloc_mem_helper(void *ptr, char *str)
+t_global		g_global;
+
+static size_t	show_alloc_mem_helper(void *ptr, char *str)
 {
-	if (ptr)
+	size_t bytes;
+
+	bytes = 0;
+	ft_printf("%s %p\n", str, ptr);
+	while (1)
 	{
-		printf("%s %p\n", str, ptr);
-		while (1)
+		if (GET_ALLOC(ptr) == 1)
 		{
-			if (GET_ALLOC(ptr) == 1)
-				printf("%p - %p : %lu bytes\n", ptr + OVERHEAD,
-					ptr + OVERHEAD + GET_SIZE(ptr), GET_SIZE(ptr));
-			if (IS_END(ptr))
-			{
-				if ((*(t_node*)(ptr + OVERHEAD + GET_SIZE(ptr))).next)
-					ptr = (*(t_node*)(ptr + OVERHEAD + GET_SIZE(ptr))).next;
-				else
-					break ;
-			}
-			else
-				ptr += OVERHEAD + GET_SIZE(ptr);
+			ft_printf("%p - %p : %lu bytes\n", ptr + OVERHEAD,
+				ptr + OVERHEAD + GET_SIZE(ptr), GET_SIZE(ptr));
+			bytes += GET_SIZE(ptr);
 		}
+		if (IS_END(ptr))
+			if ((*(t_node*)(ptr + OVERHEAD + GET_SIZE(ptr))).next)
+				ptr = (*(t_node*)(ptr + OVERHEAD + GET_SIZE(ptr))).next;
+			else
+				break ;
+		else
+			ptr = NEXT_BLKP(ptr + OVERHEAD);
 	}
+	return (bytes);
 }
 
-void		show_alloc_mem(void)
+void			show_alloc_mem(void)
 {
-	show_alloc_mem_helper(global.tiny, "TINY:");
-	show_alloc_mem_helper(global.small, "SMALL:");
-	show_alloc_mem_helper(global.large, "LARGE:");
+	size_t	bytes;
+
+	bytes = 0;
+	if (g_global.tiny)
+		bytes += show_alloc_mem_helper(g_global.tiny, "TINY:");
+	if (g_global.small)
+		bytes += show_alloc_mem_helper(g_global.small, "SMALL:");
+	if (g_global.large)
+		bytes += show_alloc_mem_helper(g_global.large, "LARGE:");
+	ft_printf("Total : %zu bytes\n", bytes);
 }
