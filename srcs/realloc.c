@@ -14,9 +14,9 @@
 
 int				get_type(size_t num)
 {
-	if (num <= TINY)
+	if (num <= (size_t)TINY)
 		return (0);
-	if (num <= SMALL)
+	if (num <= (size_t)SMALL)
 		return (1);
 	return (2);
 }
